@@ -1,18 +1,16 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/lib/prisma";
-
-interface Params {
-  params: { id: string };
-}
 
 /**
  * 🔹 GET /api/products/[id]
  * Obtiene un producto por su ID
  */
-export async function GET(_req: Request, { params }: Params) {
+export async function GET(_req: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await context.params;
+
     const product = await prisma.product.findUnique({
-      where: { id: Number(params.id) },
+      where: { id: Number(id) },
     });
 
     if (!product) {
@@ -22,10 +20,7 @@ export async function GET(_req: Request, { params }: Params) {
     return NextResponse.json(product);
   } catch (error) {
     console.error("❌ Error al obtener producto:", error);
-    return NextResponse.json(
-      { error: "Error al obtener producto" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Error al obtener producto" }, { status: 500 });
   }
 }
 
@@ -33,8 +28,9 @@ export async function GET(_req: Request, { params }: Params) {
  * 🔹 PATCH /api/products/[id]
  * Actualiza los datos de un producto existente
  */
-export async function PATCH(req: Request, { params }: Params) {
+export async function PATCH(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await context.params;
     const body: Partial<{
       name: string;
       description: string;
@@ -45,7 +41,7 @@ export async function PATCH(req: Request, { params }: Params) {
     }> = await req.json();
 
     const updatedProduct = await prisma.product.update({
-      where: { id: Number(params.id) },
+      where: { id: Number(id) },
       data: {
         ...(body.name !== undefined && { name: body.name }),
         ...(body.description !== undefined && { description: body.description }),
@@ -73,10 +69,12 @@ export async function PATCH(req: Request, { params }: Params) {
  * 🔹 DELETE /api/products/[id]
  * Elimina un producto existente
  */
-export async function DELETE(_req: Request, { params }: Params) {
+export async function DELETE(_req: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await context.params;
+
     await prisma.product.delete({
-      where: { id: Number(params.id) },
+      where: { id: Number(id) },
     });
 
     return NextResponse.json({ message: "Producto eliminado correctamente" });
