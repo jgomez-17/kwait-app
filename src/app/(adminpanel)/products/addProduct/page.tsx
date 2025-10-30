@@ -85,10 +85,10 @@ export default function NewProductPage() {
         <span>Volver</span>
       </button>
 
-      <div className="rounded-2xl bg-white">
-        <h1 className="text-lg md:text-xl font-semibold text-gray-800 mb-8 border-b pb-3">
+      <div className="rounded-2xl">
+        <h2 className="text-xl font-semibold mb-8 border-b border-gray-200 pb-2">
           Agregar Producto
-        </h1>
+        </h2>
 
         {/* Imagen (URL) */}
         <div className="mb-8 md:max-w-1/2">

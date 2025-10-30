@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useRouter, useParams, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { BackIcon, TrashIcon } from "@/app/components/icons";
 
 const categories = ["Hamburguesas", "Pizzas", "Bebidas", "Postres", "Entradas", "Combos"];
 
@@ -109,11 +110,11 @@ export default function EditProductClient() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-emerald-50">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+            animate={{ rotate: 0, scale: 1 }}
+            transition={{ duration: 0.1, repeat: Infinity, ease: "linear" }}
             className="w-16 h-16 border-4 border-emerald-500 border-t-transparent rounded-full mx-auto mb-4"
           />
           <p className="text-slate-600 font-semibold">Cargando producto...</p>
@@ -123,48 +124,41 @@ export default function EditProductClient() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50 py-8 px-4">
-      <div className="max-w-3xl mx-auto">
+    <div className="min-h-screen">
+      <div className=" mx-auto">
         {/* Header con botón de retroceso */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-6 flex items-center gap-4"
+        <div
+          className="mb-6 flex flex-col gap-y-4"
         >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button
             onClick={handleBack}
-            className="flex items-center gap-2 px-4 py-2.5 bg-white border-2 border-slate-200 hover:border-slate-300 rounded-xl text-slate-700 font-semibold shadow-sm hover:shadow-md transition-all"
+            className="flex w-max items-center gap-2 hover:text-emerald-500 transition-colors font-medium"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
+            <BackIcon />
             Volver
-          </motion.button>
+          </button>
           
-          <div className="flex-1">
-            <h2 className="text-3xl font-black bg-gradient-to-r from-slate-800 to-emerald-600 bg-clip-text text-transparent">
+ 
+            <h2 className="text-xl font-semibold border-b border-slate-200 pb-2">
               Editar Producto
             </h2>
-            <p className="text-slate-600 text-sm mt-1">Actualiza la información del producto</p>
-          </div>
-        </motion.div>
+
+        </div>
 
         {/* Formulario principal */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-3xl shadow-xl border-2 border-slate-100 overflow-hidden"
+          className="overflow-hidden"
         >
           {/* Preview de imagen */}
-          <div className="relative h-64 bg-gradient-to-br from-emerald-100 to-teal-100 overflow-hidden">
+          <div className="relative h-64 md:w-1/2 overflow-hidden bg-gray-200 rounded-xl ">
             {product.image ? (
               <img
                 src={product.image}
                 alt="Preview"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-xl"
               />
             ) : (
               <div className="absolute inset-0 flex items-center justify-center">
@@ -182,7 +176,7 @@ export default function EditProductClient() {
           </div>
 
           {/* Campos del formulario */}
-          <div className="p-8 space-y-6">
+          <div className="gap-y-6 flex flex-col mt-6">
             {/* Nombre del producto */}
             <div className="space-y-2">
               <label className="block text-sm font-bold text-slate-700 uppercase tracking-wider">
@@ -315,13 +309,11 @@ export default function EditProductClient() {
           </div>
 
           {/* Botones de acción */}
-          <div className="px-8 pb-8 flex flex-col sm:flex-row gap-4">
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+          <div className="flex my-8 align-middle sm:flex-row gap-4">
+            <button
               onClick={handleSave}
               disabled={isSaving}
-              className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-teal-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/30 hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-black text-white flex items-center gap-2 font-medium p-4 w-full justify-center rounded-xl hover:bg-black/90 transition-all  disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSaving ? (
                 <>
@@ -340,14 +332,12 @@ export default function EditProductClient() {
                   Guardar cambios
                 </>
               )}
-            </motion.button>
+            </button>
 
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+            <button
               onClick={handleDelete}
               disabled={isDeleting}
-              className="sm:w-auto px-6 py-4 bg-red-500 hover:bg-red-600 text-white font-bold rounded-xl shadow-lg shadow-red-500/30 hover:shadow-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="sm:w-auto px-6 py-4 border-2 border-red-600 bg-red-600/5 hover:bg-red-600 hover:text-white text-red-600 font-bold rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isDeleting ? (
                 <>
@@ -360,13 +350,10 @@ export default function EditProductClient() {
                 </>
               ) : (
                 <>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                  Eliminar
+                  <TrashIcon />
                 </>
               )}
-            </motion.button>
+            </button>
           </div>
         </motion.div>
       </div>

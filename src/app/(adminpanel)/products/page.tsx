@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { Edit } from "lucide-react";
+import { EditIcon, RoundedPlus } from "@/app/components/icons";
 
 interface Product {
   id: number;
@@ -66,21 +68,9 @@ export default function ProductsPage() {
         </div>
         <Link
           href="/products/addProduct"
-          className="sm:relative sm:rounded-xl sm:right-0 sm:bottom-0 right-4 bottom-4 flex items-center gap-2 text-center bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-teal-600 fixed p-4 sm:p-3 text-white rounded-full z-30 shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:scale-105 transition-all font-semibold"
+          className="sm:relative sm:rounded-xl sm:right-0 sm:bottom-0 right-4 bottom-4 flex items-center gap-2 text-center bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-teal-600 fixed p-5 sm:p-3 text-white rounded-full z-30 shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:scale-105 transition-all font-semibold"
         >
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 4v16m8-8H4"
-            />
-          </svg>
+          <RoundedPlus />
           <span className="hidden sm:block">Agregar Producto</span>
         </Link>
       </div>
@@ -144,9 +134,9 @@ export default function ProductsPage() {
                 key={product.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ y: -8 }}
-                className="group bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 overflow-hidden flex flex-col"
+                transition={{ delay: index * 0.01 }}
+                whileHover={{ scale: 1.01 }}
+                className="group border border-slate-200 rounded-2xl shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-75 overflow-hidden flex flex-col"
               >
                 {/* Imagen */}
                 <div className="relative w-full h-48 bg-gradient-to-br from-slate-100 to-slate-50 overflow-hidden">
@@ -154,14 +144,14 @@ export default function ProductsPage() {
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
                     />
                   ) : (
                     <div className="flex items-center justify-center w-full h-full text-gray-400 text-sm">
                       Sin imagen
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-75"></div>
 
                   {/* Badge de categoría */}
                   <div className="absolute top-3 right-3 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-xl text-xs font-bold text-slate-700 shadow-lg">
@@ -188,7 +178,10 @@ export default function ProductsPage() {
                       </span>
                     </div>
 
-                    <Link href={`/products/${product.id}/edit`} prefetch={false}>
+                    <Link href={`/products/${product.id}/edit`} prefetch={false}
+                    className="flex items-center justify-center gap-2 w-full text-center px-4 py-2 bg-gray-200 font-semibold rounded-xl transition-all border-2 border-transparent hover:border-gray-200 hover:bg-white "
+                    >
+                      <EditIcon />
                       Editar
                     </Link>
 
