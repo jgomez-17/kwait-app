@@ -1,0 +1,216 @@
+export interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  image: string;
+  available: boolean;
+}
+
+export const products: Product[] = [
+  {
+    id: 1,
+    name: "Hamburguesa Clásica",
+    description: "Carne jugosa, queso, lechuga y tomate",
+    price: 15000,
+    category: "Hamburguesas",
+    image:
+      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&h=500&fit=crop",
+    available: true,
+  },
+  {
+    id: 2,
+    name: "Hamburguesa BBQ",
+    description:
+      "Carne a la parrilla con salsa BBQ y cebolla caramelizada",
+    price: 17000,
+    category: "Hamburguesas",
+    image:
+      "https://images.unsplash.com/photo-1606756790138-87a3b0c7c7ef?w=500&h=500&fit=crop",
+    available: true,
+  },
+  {
+    id: 3,
+    name: "Pizza Pepperoni",
+    description:
+      "Pepperoni, queso mozzarella y salsa de tomate artesanal",
+    price: 20000,
+    category: "Pizzas",
+    image:
+      "https://images.unsplash.com/photo-1601924582971-cfba5d3d8b0c?w=500&h=500&fit=crop",
+    available: true,
+  },
+  {
+    id: 4,
+    name: "Pizza Hawaiana",
+    description: "Queso mozzarella, jamón y piña",
+    price: 21000,
+    category: "Pizzas",
+    image:
+      "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=500&h=500&fit=crop",
+    available: true,
+  },
+  {
+    id: 5,
+    name: "Perro Caliente Clásico",
+    description:
+      "Salchicha americana, papas trituradas, queso y salsas",
+    price: 12000,
+    category: "Perros Calientes",
+    image:
+      "https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&h=500&fit=crop",
+    available: true,
+  },
+  {
+    id: 6,
+    name: "Perro Mexicano",
+    description: "Salchicha, guacamole, jalapeños y salsa cheddar",
+    price: 14000,
+    category: "Perros Calientes",
+    image:
+      "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500&h=500&fit=crop",
+    available: true,
+  },
+  {
+    id: 7,
+    name: "Papas Fritas",
+    description: "Papas crujientes con sal marina",
+    price: 8000,
+    category: "Acompañamientos",
+    image:
+      "https://images.unsplash.com/photo-1550450005-93b28ccf7f9b?w=500&h=500&fit=crop",
+    available: true,
+  },
+  {
+    id: 8,
+    name: "Aros de Cebolla",
+    description:
+      "Cebolla empanizada y frita, servida con salsa tártara",
+    price: 9000,
+    category: "Acompañamientos",
+    image:
+      "https://images.unsplash.com/photo-1590080875830-16a3b0a1ef16?w=500&h=500&fit=crop",
+    available: true,
+  },
+  {
+    id: 9,
+    name: "Coca Cola",
+    description: "Refresco clásico de cola en botella 400ml",
+    price: 5000,
+    category: "Bebidas",
+    image:
+      "https://images.unsplash.com/photo-1625204610163-1ec3d13fbd6f?w=500&h=500&fit=crop",
+    available: true,
+  },
+  {
+    id: 10,
+    name: "Jugo Natural de Mango",
+    description: "Jugo natural preparado al momento",
+    price: 6000,
+    category: "Bebidas",
+    image:
+      "https://images.unsplash.com/photo-1621996346565-2afc9a7f6465?w=500&h=500&fit=crop",
+    available: false,
+  },
+  {
+    id: 11,
+    name: "Malteada de Chocolate",
+    description: "Malteada cremosa con helado y sirope de chocolate",
+    price: 10000,
+    category: "Bebidas",
+    image:
+      "https://images.unsplash.com/photo-1620148649735-0f64a1e17d33?w=500&h=500&fit=crop",
+    available: true,
+  },
+  {
+    id: 12,
+    name: "Brownie con Helado",
+    description: "Brownie caliente con bola de helado de vainilla",
+    price: 9000,
+    category: "Postres",
+    image:
+      "https://images.unsplash.com/photo-1606313564200-e75d5e52aa34?w=500&h=500&fit=crop",
+    available: true,
+  },
+  {
+    id: 13,
+    name: "Cheesecake de Fresa",
+    description: "Pastel cremoso con salsa natural de fresa",
+    price: 11000,
+    category: "Postres",
+    image:
+      "https://images.unsplash.com/photo-1601972599720-b2cf0ca2b8a8?w=500&h=500&fit=crop",
+    available: true,
+  },
+  {
+    id: 14,
+    name: "Combo Clásico",
+    description: "Hamburguesa clásica + papas fritas + bebida",
+    price: 22000,
+    category: "Combos",
+    image:
+      "https://images.unsplash.com/photo-1606755962773-d324e0a13035?w=500&h=500&fit=crop",
+    available: true,
+  },
+  {
+    id: 15,
+    name: "Combo Familiar",
+    description: "2 hamburguesas, papas grandes y 2 bebidas",
+    price: 40000,
+    category: "Combos",
+    image:
+      "https://images.unsplash.com/photo-1625945071472-6b02262a8b06?w=500&h=500&fit=crop",
+    available: false,
+  },
+  {
+    id: 16,
+    name: "Pizza Vegetariana",
+    description: "Con vegetales frescos y salsa artesanal",
+    price: 19000,
+    category: "Pizzas",
+    image:
+      "https://images.unsplash.com/photo-1594007654729-407eedc4be7d?w=500&h=500&fit=crop",
+    available: true,
+  },
+  {
+    id: 17,
+    name: "Hamburguesa Doble Queso",
+    description: "Doble carne, doble queso y pan brioche",
+    price: 18000,
+    category: "Hamburguesas",
+    image:
+      "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500&h=500&fit=crop",
+    available: false,
+  },
+  {
+    id: 18,
+    name: "Perro Americano",
+    description: "Con tocineta, cebolla crujiente y salsa BBQ",
+    price: 13000,
+    category: "Perros Calientes",
+    image:
+      "https://images.unsplash.com/photo-1625944230948-5b9198e9a0e5?w=500&h=500&fit=crop",
+    available: true,
+  },
+  {
+    id: 19,
+    name: "Combo Infantil",
+    description: "Mini hamburguesa, papas pequeñas y jugo",
+    price: 16000,
+    category: "Combos",
+    image:
+      "https://images.unsplash.com/photo-1623944928388-85a61997a4d5?w=500&h=500&fit=crop",
+    available: true,
+  },
+  {
+    id: 20,
+    name: "Helado de Vainilla",
+    description: "Helado artesanal servido en copa",
+    price: 7000,
+    category: "Postres",
+    image:
+      "https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=500&h=500&fit=crop",
+    available: true,
+  },
+];
