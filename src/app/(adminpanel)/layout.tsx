@@ -7,7 +7,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { IconLogout } from "@tabler/icons-react";
 import { X, Menu, ChevronLeft, ChevronRight, LogOut } from "lucide-react";
-import { ReportsIcon, BagSolid, UsersSolid, DashboardIcon } from "@/app/components/icons";
+import { ReportsIcon, BagSolid, UsersSolid, DashboardIcon, LogoutIcon } from "@/app/components/icons";
 import NotificationsMenu from "./dashboard/NotificationButton";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -28,12 +28,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <div className="min-h-screen flex flex-col bg-slate-50">
       {/* Header */}
       <header
-        className={`w-full bg-zinc-900 border-b border-zinc-800 h-16 flex items-center justify-between px-4 md:px-6 fixed top-0 right-0 z-50 transition-all duration-300 ${
+        className={`w-full bg-zinc-900 border-b border-zinc-800 h-18 flex items-center justify-between px-4 md:px-6 fixed top-0 right-0 z-50 transition-all duration-75 ${
           sidebarCollapsed ? "md:pl-24" : "md:pl-70"
         }`}
       >
         <button
-          className="md:hidden text-zinc-400 hover:text-emerald-400 transition-colors p-2 hover:bg-zinc-800 rounded-lg"
+          className="md:hidden text-zinc-400 hover:text-emerald-400 transition-colors p-2 hover:bg-zinc-800 rounded-xl"
           onClick={() => setSidebarOpen(!sidebarOpen)}
           aria-label={sidebarOpen ? "Cerrar menú" : "Abrir menú"}
         >
@@ -42,8 +42,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         
         <div className="flex-1 flex justify-center md:justify-start items-center gap-3">
           <div className="hidden md:block w-2 h-8 bg-gradient-to-b from-emerald-500 to-teal-600 rounded-full shadow-lg shadow-emerald-500/50" />
-          <h2 className="text-lg md:text-xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-            Panel de administración
+          <h2 className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+            Admin Panel
           </h2>
         </div>
         
@@ -52,15 +52,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
       </header>
 
-      <div className="flex flex-1 pt-16">
+      <div className="flex flex-1">
         {/* Sidebar Desktop */}
         <aside
-          className={`hidden md:flex bg-zinc-900 border-r border-zinc-800 flex-col transition-all duration-300 fixed h-[calc(100vh-4rem)] z-30 ${
+          className={`hidden md:flex bg-zinc-900 border-r border-zinc-800 flex-col transition-all duration-75 fixed h-[calc(100vh)] z-50 ${
             sidebarCollapsed ? "w-20" : "w-64"
           }`}
         >
           {/* Logo y toggle */}
-          <div className="relative flex items-center justify-center p-4 border-b border-zinc-800">
+          <div className="relative flex items-center p-3">
             <div className="flex items-center gap-3">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl blur opacity-40" />
@@ -82,7 +82,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             
             <button
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-              className="absolute -right-3 top-1/2 -translate-y-1/2 bg-zinc-800 border-2 border-zinc-700 text-zinc-400 hover:border-emerald-500 hover:text-emerald-400 hover:bg-zinc-700 transition-all rounded-full p-1.5 shadow-lg z-50"
+              className="absolute -right-3 top-1/2 -translate-y-1/2 bg-zinc-800  text-zinc-400 hover:text-emerald-400 hover:bg-zinc-700 transition-all rounded-full p-1.5 shadow-lg z-50"
               aria-label="Contraer sidebar"
             >
               {sidebarCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
@@ -125,11 +125,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div className="p-3 border-t border-zinc-800">
             <button
               onClick={() => router.push("/")}
-              className={`group w-full flex items-center gap-3 px-4 py-3 rounded-xl font-semibold bg-red-950 hover:bg-red-600 text-red-400 hover:text-white transition-all duration-300 ${
+              className={`group w-full flex items-center gap-3 px-4 py-3 rounded-xl font-semibold  bg-red-950 hover:bg-red-950/90 text-red-400 transition-all duration-75 ${
                 sidebarCollapsed ? "justify-center" : ""
               }`}
             >
-              <LogOut size={20} className="flex-shrink-0" />
+              <LogoutIcon />
               {!sidebarCollapsed && <span>Cerrar sesión</span>}
             </button>
           </div>
@@ -137,7 +137,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         {/* Main Content */}
         <main
-          className={`flex-1 px-4 md:px-8 py-6 transition-all duration-300 bg-white ${
+          className={`flex-1 px-4 md:px-8 py-6 transition-all duration-75 bg-white mt-18 ${
             sidebarCollapsed ? "md:ml-20" : "md:ml-64"
           }`}
         >
@@ -219,7 +219,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   onClick={() => router.push("/")}
                   className="w-full flex items-center justify-center gap-2 bg-red-950 hover:bg-red-600 text-red-400 hover:text-white px-4 py-3 rounded-xl font-semibold transition-all duration-300 group"
                 >
-                  <LogOut size={20} className="group-hover:-translate-x-0.5 transition-transform" />
+                  <LogoutIcon /> 
                   <span>Cerrar sesión</span>
                 </button>
               </div>

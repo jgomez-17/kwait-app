@@ -86,13 +86,35 @@ export default function NewProductPage() {
       </button>
 
       <div className="rounded-2xl">
-        <h2 className="text-xl font-semibold mb-8 border-b border-gray-200 pb-2">
+        <h2 className="text-xl font-semibold mb-8 border-b text-center sm:text-left border-gray-200 pb-2">
           Agregar Producto
         </h2>
 
+<div className="relative h-64 md:w-1/2 overflow-hidden bg-gray-200 rounded-xl ">
+            {product.image ? (
+              <img
+                src={product.image}
+                alt="Preview"
+                className="w-full h-full object-cover rounded-xl"
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center">
+                  <svg className="w-20 h-20 text-slate-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <p className="text-slate-400 font-medium">Sin imagen</p>
+                </div>
+              </div>
+            )}
+            <div className="absolute top-4 left-4 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-xl text-xs font-bold text-slate-700 shadow-lg">
+              Vista previa
+            </div>
+          </div>
+
         {/* Imagen (URL) */}
-        <div className="mb-8 md:max-w-1/2">
-          <label className="block font-medium mb-2 text-gray-700">
+        <div className="my-8 md:max-w-1/2 flex flex-col gap-2">
+          <label className="block text-sm font-bold text-slate-700 uppercase tracking-wider">
             URL de la imagen
           </label>
           <input
@@ -100,34 +122,25 @@ export default function NewProductPage() {
             value={product.image}
             onChange={(e) => setProduct({ ...product, image: e.target.value })}
             placeholder="Ejemplo: https://mi-servidor.com/imagen.jpg"
-            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none transition"
+            className="w-full pl-4 pr-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-zinc-600 focus:ring-4 focus:ring-gray-200 outline-none transition-all text-slate-800 font-medium placeholder-slate-300"
           />
-          {product.image && (
-            <motion.img
-              src={product.image}
-              alt="Preview"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="w-full h-64 object-cover rounded-lg shadow-md mt-3"
-            />
-          )}
         </div>
 
         {/* Nombre */}
-        <div className="mb-6 md:max-w-1/2">
-          <label className="block font-medium mb-2 text-gray-700">Nombre</label>
+        <div className="mb-6 md:max-w-1/2 flex flex-col gap-2">
+          <label className="block text-sm font-bold text-slate-700 uppercase tracking-wider">Nombre</label>
           <input
             type="text"
             value={product.name}
             onChange={(e) => setProduct({ ...product, name: e.target.value })}
             placeholder="Ejemplo: Hamburguesa clásica"
-            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none transition"
+            className="w-full pl-4 pr-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-zinc-600 focus:ring-4 focus:ring-gray-200 outline-none transition-all text-slate-800 font-medium placeholder-slate-300"
           />
         </div>
 
         {/* Descripción */}
-        <div className="mb-6 md:max-w-1/2">
-          <label className="block font-medium mb-2 text-gray-700">
+        <div className="mb-6 md:max-w-1/2 flex flex-col gap-2">
+          <label className="block text-sm font-bold text-slate-700 uppercase tracking-wider">
             Descripción
           </label>
           <textarea
@@ -137,27 +150,27 @@ export default function NewProductPage() {
             }
             placeholder="Describe brevemente el producto..."
             rows={3}
-            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none transition resize-none"
+            className="w-full pl-4 pr-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-zinc-600 focus:ring-4 focus:ring-gray-200 outline-none transition-all text-slate-800 font-medium placeholder-slate-300 resize-none"
           />
         </div>
 
         {/* Precio */}
-        <div className="mb-6 md:max-w-1/2">
-          <label className="block font-medium mb-2 text-gray-700">
+        <div className="mb-6 flex flex-col gap-2 md:max-w-1/2">
+          <label className="block text-sm font-bold text-slate-700 uppercase tracking-wider">
             Precio (COP)
           </label>
           <input
             type="text"
             value={product.price === 0 ? "" : formattedPrice}
             onChange={handlePriceChange}
-            placeholder="$0"
-            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none transition"
+            placeholder="$ 0"
+            className="w-full pl-4 pr-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-zinc-600 focus:ring-4 focus:ring-gray-200 outline-none transition-all text-slate-800 font-medium placeholder-slate-300"
           />
         </div>
 
         {/* Categoría */}
-        <div className="mb-8 md:max-w-1/2">
-          <label className="block font-medium mb-2 text-gray-700">
+        <div className="mb-8 md:max-w-1/2 flex flex-col gap-2">
+          <label className="block text-sm font-bold text-slate-700 uppercase tracking-wider">
             Categoría
           </label>
           <select
@@ -165,7 +178,7 @@ export default function NewProductPage() {
             onChange={(e) =>
               setProduct({ ...product, category: e.target.value })
             }
-            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 outline-none transition"
+            className="w-full pl-4 pr-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-zinc-600 focus:ring-4 focus:ring-gray-200 outline-none transition-all text-slate-800 font-medium placeholder-slate-300"
           >
             {categories.map((cat) => (
               <option key={cat}>{cat}</option>

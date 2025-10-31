@@ -10,18 +10,18 @@ export default function Home() {
     <main className="relative w-full min-h-screen overflow-hidden">
       {/* Elementos decorativos de fondo */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-300/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-300/20 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-300/10 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-slate-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-slate/20 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-slate-300/10 rounded-full blur-3xl" />
       </div>
 
       {/* Header con login */}
       <div className="absolute top-0 left-0 right-0 z-20 p-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.4 }}
             className="text-emerald-600 font-bold text-xl"
           >
             Kwait
@@ -46,7 +46,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto w-full">
           
           {/* Hero Section */}
-          <div className="text-center mb-20">
+          <div className="text-center mb-20 h-screen">
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
@@ -54,7 +54,7 @@ export default function Home() {
                 type: "spring",
                 stiffness: 200,
                 damping: 20,
-                duration: 0.8 
+                duration: 0.3 
               }}
               className="inline-block mb-8 relative"
             >
@@ -91,16 +91,16 @@ export default function Home() {
                 el alma
               </span>
             </motion.h1>
+          </div>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.4 }}
-              className="text-slate-600 text-lg md:text-xl max-w-2xl mx-auto mb-12"
+              transition={{ delay: 0.5, duration: 0.2 }}
+              className="text-slate-600 text-lg text-center md:text-xl max-w-2xl mx-auto mb-12"
             >
               Descubre sabores auténticos preparados con amor. Elige tu experiencia perfecta.
             </motion.p>
-          </div>
 
           {/* Cards de opciones */}
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">

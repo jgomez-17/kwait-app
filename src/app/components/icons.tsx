@@ -40,7 +40,6 @@ export const NotificationsSolid = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><mask id="SVGqseT2zzL"><g fill="none" stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path fill="#fff" fillOpacity="0" strokeDasharray="72" strokeDashoffset="72" d="M3 19.5v-15.5c0 -0.55 0.45 -1 1 -1h16c0.55 0 1 0.45 1 1v12c0 0.55 -0.45 1 -1 1h-14.5Z"><animate fill="freeze" attributeName="fill-opacity" begin="0.7s" dur="0.5s" values="0;1"/><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="72;0"/></path><path stroke="#000" strokeDasharray="10" strokeDashoffset="10" d="M8 7h8"><animate fill="freeze" attributeName="stroke-dashoffset" begin="1.2s" dur="0.2s" values="10;0"/></path><path stroke="#000" strokeDasharray="10" strokeDashoffset="10" d="M8 10h8"><animate fill="freeze" attributeName="stroke-dashoffset" begin="1.5s" dur="0.2s" values="10;0"/></path><path stroke="#000" strokeDasharray="6" strokeDashoffset="6" d="M8 13h4"><animate fill="freeze" attributeName="stroke-dashoffset" begin="1.8s" dur="0.2s" values="6;0"/></path></g></mask><rect width="24" height="24" fill="currentColor" mask="url(#SVGqseT2zzL)"/></svg>
 );
 
-
 export const Notifications2 = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="22px" height="auto" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 9h8m-8 4h6m4-9a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-5l-5 3v-3H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z" /></svg>
 );
@@ -55,7 +54,7 @@ export const BackIcon = () => (
 );
 
 export const LogoutIcon = () => (
-<svg xmlns="http://www.w3.org/2000/svg" width="22" height="auto" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M14 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-2" /><path d="M9 12h12l-3-3m0 6l3-3" /></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="auto" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5"><path d="M14 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-2" /><path d="M9 12h12l-3-3m0 6l3-3" /></g></svg>
 );
 
 export const EditIcon = () => (
@@ -65,5 +64,34 @@ export const EditIcon = () => (
 export const TrashIcon = () => (
 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="auto" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.3" d="M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" /></svg>
 );
+
+export const Loading1 = () => (
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><rect width="10" height="10" x="1" y="1" fill="currentColor" rx="1"><animate id="SVG7WybndBt" fill="freeze" attributeName="x" begin="0;SVGo3aOUHlJ.end" dur="0.2s" values="1;13" /><animate id="SVGVoKldbWM" fill="freeze" attributeName="y" begin="SVGFpk9ncYc.end" dur="0.2s" values="1;13" /><animate id="SVGKsXgPbui" fill="freeze" attributeName="x" begin="SVGaI8owdNK.end" dur="0.2s" values="13;1" /><animate id="SVG7JzAfdGT" fill="freeze" attributeName="y" begin="SVG28A4To9L.end" dur="0.2s" values="13;1" /></rect><rect width="10" height="10" x="1" y="13" fill="currentColor" rx="1"><animate id="SVGUiS2jeZq" fill="freeze" attributeName="y" begin="SVG7WybndBt.end" dur="0.2s" values="13;1" /><animate id="SVGU0vu2GEM" fill="freeze" attributeName="x" begin="SVGVoKldbWM.end" dur="0.2s" values="1;13" /><animate id="SVGOIboFeLf" fill="freeze" attributeName="y" begin="SVGKsXgPbui.end" dur="0.2s" values="1;13" /><animate id="SVG14lAaeuv" fill="freeze" attributeName="x" begin="SVG7JzAfdGT.end" dur="0.2s" values="13;1" /></rect><rect width="10" height="10" x="13" y="13" fill="currentColor" rx="1"><animate id="SVGFpk9ncYc" fill="freeze" attributeName="x" begin="SVGUiS2jeZq.end" dur="0.2s" values="13;1" /><animate id="SVGaI8owdNK" fill="freeze" attributeName="y" begin="SVGU0vu2GEM.end" dur="0.2s" values="13;1" /><animate id="SVG28A4To9L" fill="freeze" attributeName="x" begin="SVGOIboFeLf.end" dur="0.2s" values="1;13" /><animate id="SVGo3aOUHlJ" fill="freeze" attributeName="y" begin="SVG14lAaeuv.end" dur="0.2s" values="1;13" /></rect></svg>
+);
+
+export const Loading2 = () => (
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M12,23a9.63,9.63,0,0,1-8-9.5,9.51,9.51,0,0,1,6.79-9.1A1.66,1.66,0,0,0,12,2.81h0a1.67,1.67,0,0,0-1.94-1.64A11,11,0,0,0,12,23Z"><animateTransform attributeName="transform" dur="0.75s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12" /></path></svg>
+);
+
+export const Loading3 = () => (
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="auto" viewBox="0 0 24 24"><g><rect width="2" height="5" x="11" y="1" fill="currentColor" opacity=".14" /><rect width="2" height="5" x="11" y="1" fill="currentColor" opacity=".29" transform="rotate(30 12 12)" /><rect width="2" height="5" x="11" y="1" fill="currentColor" opacity=".43" transform="rotate(60 12 12)" /><rect width="2" height="5" x="11" y="1" fill="currentColor" opacity=".57" transform="rotate(90 12 12)" /><rect width="2" height="5" x="11" y="1" fill="currentColor" opacity=".71" transform="rotate(120 12 12)" /><rect width="2" height="5" x="11" y="1" fill="currentColor" opacity=".86" transform="rotate(150 12 12)" /><rect width="2" height="5" x="11" y="1" fill="currentColor" transform="rotate(180 12 12)" /><animateTransform attributeName="transform" calcMode="discrete" dur="0.75s" repeatCount="indefinite" type="rotate" values="0 12 12;30 12 12;60 12 12;90 12 12;120 12 12;150 12 12;180 12 12;210 12 12;240 12 12;270 12 12;300 12 12;330 12 12;360 12 12" /></g></svg>
+);
+
+export const Food1  = () => (
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="auto" viewBox="0 0 28 28"><path fill="currentColor" d="M5.492 2.79a.881.881 0 0 1 1.758.092v5.867a.75.75 0 1 0 1.5 0V2.75a.75.75 0 0 1 1.5 0v5.999a.75.75 0 0 0 1.5 0V2.882a.882.882 0 0 1 1.758-.092c.076.722.492 4.785.492 6.71c0 1.338-.585 2.54-1.51 3.364c-.334.296-.49.601-.49.857v.727l.001.047c.042.599.499 7.287.499 8.505a3 3 0 1 1-6 0c0-1.218.458-7.906.499-8.505L7 14.448v-.727c0-.255-.156-.56-.49-.857A4.5 4.5 0 0 1 5 9.5c0-1.925.416-5.988.492-6.71M18.955 14l-.032.556c-.047.817-.11 1.92-.172 3.062c-.124 2.267-.251 4.734-.251 5.382a3 3 0 1 0 6 0c0-.721-.158-3.474-.294-5.855l-.004-.066C24.093 15.18 24 13.55 24 13.25V2.75a.75.75 0 0 0-.75-.75h-.5A6.75 6.75 0 0 0 16 8.75v3.5c0 .966.784 1.75 1.75 1.75z" /></svg>
+);
+
+// export const  = () => (
+// );
+
+// export const  = () => (
+// );
+
+// export const  = () => (
+// );
+
+// export const  = () => (
+// );
+
 // export const  = () => (
 // );

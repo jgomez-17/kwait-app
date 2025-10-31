@@ -19,10 +19,9 @@ const HomePage: React.FC = () => {
     <CartProvider>
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
 
-        <main className="py-10">
+        <main className="py-2">
           <Menu />
         </main>
-
         <Cart />
       </div>
     </CartProvider>

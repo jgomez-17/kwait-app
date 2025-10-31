@@ -112,20 +112,11 @@ export const Menu: React.FC = () => {
             >
               {/* Header */}
               <div className="text-center mb-12">
-                <motion.div
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.1 }}
-                  className="inline-block mb-4"
-                >
-                  <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl flex items-center justify-center shadow-lg shadow-emerald-500/30 rotate-3">
-                    <span className="text-4xl">🍽️</span>
-                  </div>
-                </motion.div>
+ 
                 <h1 className="text-5xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mb-3">
                   Nuestro Menú
                 </h1>
-                <p className="text-slate-600 text-lg">Explora nuestras deliciosas opciones</p>
+                <p className="text-slate-500 text-md font-medium">Explora nuestras deliciosas opciones</p>
               </div>
 
               {/* Grid de categorías */}
@@ -137,17 +128,17 @@ export const Menu: React.FC = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    whileHover={{ scale: 1.05, y: -5 }}
+                    whileHover={{ scale: 1.02, y: -3 }}
                     whileTap={{ scale: 0.98 }}
-                    className="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 overflow-hidden"
+                    className="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl hover:shadow-slate-500/30 transition-all duration-75 overflow-hidden"
                   >
                     {/* Background gradient on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-75" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-slate-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-75" />
                     
                     {/* Content */}
                     <div className="relative z-10 flex flex-col items-center gap-4">
                       <div className="w-20 h-20 bg-gradient-to-br from-emerald-100 to-teal-100 group-hover:from-emerald-500 group-hover:to-teal-600 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-md">
-                        <span className="text-4xl group-hover:scale-110 transition-transform duration-300">
+                        <span className="text-4xl group-hover:scale-110 transition-transform duration-75">
                           {getCategoryIcon(cat)}
                         </span>
                       </div>
@@ -183,7 +174,7 @@ export const Menu: React.FC = () => {
               exit="exit"
             >
               {/* Header de categoría */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 mb-8 shadow-lg sticky top-4 z-20">
+              <div className="bg-white-/80 backdrop-blur-sm rounded-3xl p-4 mb-8 shadow-lg sticky top-2 z-20">
                 <div className="flex items-center justify-between">
                   <button
                     onClick={() => setSelectedCategory(null)}
@@ -211,17 +202,17 @@ export const Menu: React.FC = () => {
                     key={p.id}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.05 }}
-                    whileHover={{ y: -8 }}
-                    className="group bg-white rounded-3xl shadow-lg hover:shadow-2xl hover:shadow-emerald-500/20 transition-all duration-300 overflow-hidden"
+                    transition={{ delay: index * 0.04 }}
+                    whileHover={{ y: -2 }}
+                    className="group bg-white rounded-3xl shadow-lg hover:shadow-2xl hover:shadow-emerald-slate/20 transition-all duration-100 overflow-hidden"
                   >
                     {/* Imagen del producto */}
-                    <div className="relative h-48 overflow-hidden bg-gradient-to-br from-emerald-100 to-teal-100">
+                    <div className="relative h-48 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-300">
                       {p.img ? (
                         <img
                           src={p.img}
                           alt={p.name}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-100"
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">

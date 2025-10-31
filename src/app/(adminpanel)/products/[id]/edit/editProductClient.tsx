@@ -3,7 +3,8 @@
 import { useEffect, useState, useRef } from "react";
 import { useRouter, useParams, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { BackIcon, TrashIcon } from "@/app/components/icons";
+import { BackIcon, Loading2, TrashIcon } from "@/app/components/icons";
+import Link from "next/link";
 
 const categories = ["Hamburguesas", "Pizzas", "Bebidas", "Postres", "Entradas", "Combos"];
 
@@ -104,20 +105,13 @@ export default function EditProductClient() {
     setProduct((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleBack = () => {
-    router.back();
-  };
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <motion.div
-            animate={{ rotate: 0, scale: 1 }}
-            transition={{ duration: 0.1, repeat: Infinity, ease: "linear" }}
-            className="w-16 h-16 border-4 border-emerald-500 border-t-transparent rounded-full mx-auto mb-4"
-          />
-          <p className="text-slate-600 font-semibold">Cargando producto...</p>
+        <div className="text-center text-emerald-500 gap-6 flex flex-col items-center p-6 ">
+          <Loading2 />
+          <p className="font-semibold">Cargando producto...</p>
         </div>
       </div>
     );
@@ -128,18 +122,17 @@ export default function EditProductClient() {
       <div className=" mx-auto">
         {/* Header con botón de retroceso */}
         <div
-          className="mb-6 flex flex-col gap-y-4"
+          className="mb-6 flex flex-col gap-y-6"
         >
-          <button
-            onClick={handleBack}
+          <Link
+            href="/products"
             className="flex w-max items-center gap-2 hover:text-emerald-500 transition-colors font-medium"
           >
             <BackIcon />
             Volver
-          </button>
+          </Link>
           
- 
-            <h2 className="text-xl font-semibold border-b border-slate-200 pb-2">
+            <h2 className="text-xl font-semibold border-b border-slate-200 pb-2 text-center sm:text-left">
               Editar Producto
             </h2>
 
@@ -177,6 +170,27 @@ export default function EditProductClient() {
 
           {/* Campos del formulario */}
           <div className="gap-y-6 flex flex-col mt-6">
+
+            {/* URL de imagen */}
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-slate-700 uppercase tracking-wider">
+                URL de imagen
+              </label>
+              <div className="relative">
+                <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <input
+                  type="text"
+                  name="image"
+                  placeholder="https://ejemplo.com/imagen.jpg"
+                  value={product.image || ""}
+                  onChange={handleChange}
+                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-zinc-600 focus:ring-4 focus:ring-gray-200 outline-none transition-all text-slate-800 font-medium placeholder-slate-300"
+                />
+              </div>
+            </div>
+
             {/* Nombre del producto */}
             <div className="space-y-2">
               <label className="block text-sm font-bold text-slate-700 uppercase tracking-wider">
@@ -188,7 +202,7 @@ export default function EditProductClient() {
                 placeholder="Ej: Hamburguesa Clásica"
                 value={product.name}
                 onChange={handleChange}
-                className="w-full px-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 outline-none transition-all text-slate-800 font-medium placeholder-slate-400"
+                className="w-full pl-4 pr-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-zinc-600 focus:ring-4 focus:ring-gray-200 outline-none transition-all text-slate-800 font-medium placeholder-slate-300"
               />
             </div>
 
@@ -207,7 +221,7 @@ export default function EditProductClient() {
                     placeholder="15000"
                     value={product.price}
                     onChange={handleChange}
-                    className="w-full pl-8 pr-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 outline-none transition-all text-slate-800 font-medium placeholder-slate-400"
+                    className="w-full pl-10 pr-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-zinc-600 focus:ring-4 focus:ring-gray-200 outline-none transition-all text-slate-800 font-medium placeholder-slate-300"
                   />
                 </div>
               </div>
@@ -221,7 +235,7 @@ export default function EditProductClient() {
                   <button
                     type="button"
                     onClick={() => setCategoryMenuOpen(!categoryMenuOpen)}
-                    className="w-full px-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl hover:border-slate-300 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 outline-none transition-all text-slate-800 font-medium text-left flex items-center justify-between"
+                    className="w-full px-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl hover:border-slate-300 focus:border-zinc-600 focus:ring-4 focus:ring-gray-200 outline-none transition-all text-slate-800 font-medium text-left flex items-center justify-between"
                   >
                     <span className={product.category ? "text-slate-800" : "text-slate-400"}>
                       {product.category || "Seleccionar categoría"}
@@ -283,29 +297,11 @@ export default function EditProductClient() {
                 value={product.description || ""}
                 onChange={handleChange}
                 rows={4}
-                className="w-full px-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 outline-none transition-all text-slate-800 font-medium placeholder-slate-400 resize-none"
+                className="w-full px-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-zinc-600 focus:ring-4 focus:ring-gray-200 outline-none transition-all text-slate-800 font-medium placeholder-slate-300 resize-none"
               />
             </div>
 
-            {/* URL de imagen */}
-            <div className="space-y-2">
-              <label className="block text-sm font-bold text-slate-700 uppercase tracking-wider">
-                URL de imagen
-              </label>
-              <div className="relative">
-                <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <input
-                  type="text"
-                  name="image"
-                  placeholder="https://ejemplo.com/imagen.jpg"
-                  value={product.image || ""}
-                  onChange={handleChange}
-                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 outline-none transition-all text-slate-800 font-medium placeholder-slate-400"
-                />
-              </div>
-            </div>
+
           </div>
 
           {/* Botones de acción */}
@@ -337,7 +333,7 @@ export default function EditProductClient() {
             <button
               onClick={handleDelete}
               disabled={isDeleting}
-              className="sm:w-auto px-6 py-4 border-2 border-red-600 bg-red-600/5 hover:bg-red-600 hover:text-white text-red-600 font-bold rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="sm:w-auto px-6 py-4 bg-red-600/5 hover:bg-red-600 hover:text-white text-red-600 font-bold rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isDeleting ? (
                 <>
