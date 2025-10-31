@@ -16,7 +16,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import NotificationsMenu from "./dashboard/NotificationButton";
+import NotificationsMenu from "../components/NotificationButton";
 
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {

@@ -9,12 +9,55 @@ datasource db {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
   description String?
   price       Int
   category    String
   image       String?
-  available   Boolean  @default(true)
-  createdAt   DateTime @default(now())
+  available   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+
+  orderItems  OrderItem[]
 }
+
+enum OrderStatus {
+  PENDING
+  IN_PREPARATION
+  ON_THE_WAY
+  DELIVERED
+  CANCELED
+}
+
+
+model Order {
+  id            Int           @id @default(autoincrement())
+  items         OrderItem[]
+  subtotal      Int
+  comment       String?
+  deliveryType  String
+  deliveryInfo  DeliveryInfo?
+  status        OrderStatus   @default(PENDING)
+  createdAt     DateTime      @default(now())
+}
+
+
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   Int
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+  qty       Int
+}
+
+model DeliveryInfo {
+  id       Int    @id @default(autoincrement())
+  name     String
+  address  String
+  phone    String
+  order    Order  @relation(fields: [orderId], references: [id])
+  orderId  Int    @unique
+}
+
+

@@ -7,7 +7,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { X, Menu, ChevronLeft, ChevronRight, LogOut } from "lucide-react";
 import { ReportsIcon, BagSolid, UsersSolid, DashboardIcon } from "@/app/components/icons";
-import NotificationsMenu from "./dashboard/NotificationButton";
+import NotificationsMenu from "../components/NotificationButton";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);

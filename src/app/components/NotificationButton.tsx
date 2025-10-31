@@ -13,8 +13,8 @@ interface Notification {
 
 const sampleNotifications: Notification[] = [
   { id: 1, title: "Nuevo pedido", message: "Tienes un nuevo pedido pendiente.", time: "Hace 5 min" },
-  { id: 2, title: "Producto agotado", message: "El producto Shampoo Premium está sin stock.", time: "Hace 30 min" },
-  { id: 3, title: "Reporte generado", message: "Tu reporte diario fue generado correctamente.", time: "Hace 1 h" },
+  { id: 2, title: "Producto no disponible", message: "El producto no esta en stock.", time: "Hace 30 min" },
+  { id: 3, title: "producto creado correctamente", message: "el producto pizza 3 carnes fue creado correctamente.", time: "Hace 1 h" },
 ];
 
 export default function NotificationsMenu() {

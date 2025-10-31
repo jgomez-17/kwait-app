@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { useCart } from "./CartContext";
 import { motion, AnimatePresence } from "framer-motion";
+import { data } from "framer-motion/client";
 
 export const Cart: React.FC = () => {
   const {
@@ -33,20 +34,43 @@ export const Cart: React.FC = () => {
     setDeliveryInfo({ ...deliveryInfo, [k]: e.target.value });
   };
 
-  const handleCheckout = () => {
-    const payload = {
-      items,
-      subtotal,
-      comment,
-      deliveryType,
-      deliveryInfo: deliveryType === "delivery" ? deliveryInfo : null,
-      createdAt: new Date().toISOString(),
-    };
-    console.log("Checkout payload", payload);
-    alert("Pedido simulado. Revisa la consola para ver el payload.");
+const handleCheckout = async () => {
+  const payload = {
+    // si tienes un userId o algo similar, agrégalo aquí
+    items: items.map((it) => ({
+      product: { id: it.product.id }, // 👈 estructura que Prisma espera
+      qty: it.qty,
+    })),
+    subtotal,
+    comment,
+    deliveryType,
+    deliveryInfo: deliveryType === "delivery" ? deliveryInfo : null,
+  };
+
+  try {
+    const res = await fetch("/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) throw new Error("Error al crear el pedido");
+
+    const data = await res.json();
+    console.log("✅ Pedido creado:", data);
+
+    alert("✅ Pedido creado con éxito");
     clear();
     toggleOpen(false);
-  };
+  } catch (error) {
+    console.error("❌ Error al crear pedido:", error);
+    alert("Hubo un problema al enviar el pedido.");
+  }
+};
+
+
 
   return (
     <>

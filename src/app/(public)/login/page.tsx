@@ -35,10 +35,10 @@ export default function LoginPage() {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
+          transition={{ delay: 0.3, duration: 0.2 }}
           className="text-center mb-8"
         >
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mb-2">
+          <h1 className="text-3xl font-bold bg-black bg-clip-text text-transparent mb-2">
             Bienvenido de vuelta
           </h1>
           <p className="text-slate-500 text-sm">Accede al panel administrativo</p>
@@ -55,13 +55,13 @@ export default function LoginPage() {
               Usuario
             </label>
             <div className="relative group">
-              <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-emerald-500 transition-colors" size={20} />
+              <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-200 z-10" size={22} />
               <input
                 type="text"
                 placeholder="Nombre de usuario"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full pl-12 pr-4 py-3.5 border-2 border-slate-200 rounded-xl focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all bg-white/50 backdrop-blur-sm"
+                className="w-full tracking-wider pl-12 pr-4 py-3.5 border-2 border-transparent rounded-3xl outline-none transition-all bg-gray-100 backdrop-blur-sm placeholder:text-sm placeholder:text-gray-300 placeholder:font-medium"
                 required
               />
             </div>
@@ -77,32 +77,28 @@ export default function LoginPage() {
               Contraseña
             </label>
             <div className="relative group">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-emerald-500 transition-colors" size={20} />
+              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-200 z-10" size={20} />
               <input
                 type="password"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-12 pr-4 py-3.5 border-2 border-slate-200 rounded-xl focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all bg-white/50 backdrop-blur-sm"
+                className="w-full pl-12 pr-4 py-3.5 border-2 border-transparent rounded-3xl outline-none transition-all bg-gray-100 backdrop-blur-sm placeholder:text-gray-200"
                 required
               />
             </div>
           </motion.div>
 
           {/* Botón de submit */}
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+          <button
+
             onClick={handleSubmit}
             type="button"
-            className="group w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-4 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2"
+            className="group w-full bg-black text-white font-bold py-4 rounded-3xl transition-all shadow-lg flex items-center justify-center group"
           >
-            <span>Iniciar sesión</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </motion.button>
+            <span className="group-hover:-translate-x-1 transition">Iniciar sesión</span>
+            <ArrowRight className="w-5 absolute opacity-0 group-hover:translate-0 group-hover:relative h-5 group-hover:translate-x-1 group-hover:opacity-100 transition-transform" />
+          </button>
         </div>
 
         {/* Footer */}
