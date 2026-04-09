@@ -20,13 +20,14 @@ interface OrderRequestBody {
   deliveryType: "onsite" | "delivery";
   deliveryInfo?: DeliveryInfoInput | null;
   status?: OrderStatus; // usa el tipo de Prisma directamente
+  userId?: number | null; // ✅ agregado
 }
 
 // ✅ POST: crear nuevo pedido
 export async function POST(req: Request) {
   try {
     const body: OrderRequestBody = await req.json();
-    const { items, subtotal, comment, deliveryType, deliveryInfo, status } = body;
+    const { items, subtotal, comment, deliveryType, deliveryInfo, status, userId } = body;
 
     if (!items || items.length === 0) {
       return NextResponse.json({ error: "No se enviaron productos" }, { status: 400 });
@@ -45,6 +46,7 @@ export async function POST(req: Request) {
         comment,
         deliveryType,
         status: status || OrderStatus.PENDING, // ✅ ahora TypeScript lo entiende
+        userId: userId ?? null, // ✅ si viene null, lo guarda null
         deliveryInfo: deliveryInfo
           ? {
               create: {
@@ -82,6 +84,7 @@ export async function GET() {
           include: { product: true },
         },
         deliveryInfo: true,
+        user: true,
       },
       orderBy: { createdAt: "desc" },
     });

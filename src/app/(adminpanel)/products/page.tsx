@@ -96,22 +96,22 @@ export default function ProductsPage() {
       <div className="flex border-b border-slate-200 py-4 items-center sm:flex-row justify-between sm:items-center gap-4">
         <div>
           <h3 className="text-xl text-center font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-            Productos
+            Products
           </h3>
         </div>
         <div className="flex gap-2">
           <Link 
             href={"/menu "} prefetch={false}
-            className="bg-amber-400 flex items-center gap-2 font-medium px-4 py-2 transition rounded-xl hover:bg-amber-300">
+            className="bg-amber-400 text-sm font-semibold flex items-center gap-2 px-2 h-10 transition rounded-xl hover:bg-amber-300">
           <Food1 />
-          Ver menu
+          Show menu
           </Link>
           <Link
             href="/products/addProduct"
-            className="sm:relative sm:rounded-xl sm:right-0 sm:bottom-0 right-4 bottom-4 flex items-center gap-2 text-center bg-emerald-600 hover:from-emerald-600 hover:to-teal-600 fixed p-5 sm:p-3 text-white rounded-full z-30 shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:scale-101 transition-all font-semibold"
+            className="sm:relative h-10 sm:rounded-xl sm:right-0 sm:bottom-0 right-4 bottom-4 flex items-center gap-2 text-center bg-emerald-600 hover:from-emerald-600 hover:to-teal-600 fixed p-5 sm:p-3 text-white rounded-full z-30 shadow-lg shadow-emerald-500/30 hover:shadow-xl hover:scale-101 transition-all font-semibold text-sm"
           >
             <RoundedPlus />
-            <span className="hidden sm:block">Agregar Producto</span>
+            <span className="hidden sm:block">Add Product</span>
           </Link>
         </div>
       </div>

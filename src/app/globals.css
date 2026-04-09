@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
 
-
-
 :root {
   font-family: var(--font-geist-sans), sans-serif;
 }

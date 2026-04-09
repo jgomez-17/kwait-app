@@ -25,6 +25,11 @@ export default function Home() {
             className="text-emerald-600 font-bold text-xl"
           >
             Kwait
+            <div className="flex font-normal text-gray-300  flex-col text-sm mt-1">
+              <code>Demo</code>
+              <code className=""> User: admin</code>
+              <code>Password: 123</code>
+            </div>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 20 }}

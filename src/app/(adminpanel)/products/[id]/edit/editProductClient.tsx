@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useRouter, useParams, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { BackIcon, Loading2, TrashIcon } from "@/app/components/icons";
+import { BackIcon, Loading1, Loading2, Loading3, Loading4, TrashIcon } from "@/app/components/icons";
 import Link from "next/link";
 
 const categories = ["Hamburguesas", "Pizzas", "Bebidas", "Postres", "Entradas", "Combos"];
@@ -110,7 +110,7 @@ export default function EditProductClient() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center text-emerald-500 gap-6 flex flex-col items-center p-6 ">
-          <Loading2 />
+          <Loading4 />
           <p className="font-semibold">Cargando producto...</p>
         </div>
       </div>

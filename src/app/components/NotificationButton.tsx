@@ -37,8 +37,8 @@ export default function NotificationsMenu() {
       <button
         onClick={() => setOpen(!open)}
         aria-label="Notificaciones"
-        className={`relative text-zinc-400 hover:bg-zinc-800 px-3 py-2 rounded-lg hover:text-emerald-400 transition-all
-          ${open ? "bg-zinc-800 text-emerald-400" : ""}`}
+        className={`relative text-zinc-400 hover:bg-zinc-800/5 px-3 py-2 rounded-lg hover:text-emerald-400 transition-all
+          ${open ? "bg-zinc-800/5 text-emerald-400" : ""}`}
       >
         <Notifications2Solid />
         {/* Badge de notificaciones */}
@@ -54,7 +54,7 @@ export default function NotificationsMenu() {
           <>
             {/* Fondo oscuro para móviles */}
             <motion.div
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 sm:hidden"
+              className="fixed inset-0 bg-white backdrop-blur-sm z-40 sm:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -69,21 +69,21 @@ export default function NotificationsMenu() {
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
               className="hidden sm:block absolute right-0 mt-3 z-50 w-96 
-                         bg-zinc-900 shadow-2xl rounded-2xl border border-zinc-800
+                         bg-white shadow rounded-2xl
                          overflow-hidden"
             >
               {/* Flecha triangular apuntando al botón */}
-              <div className="absolute -top-2 right-4 w-4 h-4 bg-zinc-900 border-l border-t border-zinc-800 transform rotate-45" />
+              <div className="absolute -top-2 right-4 w-4 h-4 transform rotate-45" />
               
               {/* Encabezado */}
-              <div className="px-5 py-4 border-b border-zinc-800 flex justify-between items-center">
+              <div className="px-5 py-4 shadow-xs border-zinc-800 flex justify-between items-center">
                 <div>
-                  <h3 className="text-base font-bold text-white">Notificaciones</h3>
+                  <h3 className="text-base font-bold">Notificaciones</h3>
                   <p className="text-xs text-zinc-400 mt-0.5">{sampleNotifications.length} nuevas</p>
                 </div>
                 <button
                   onClick={() => setOpen(false)}
-                  className="text-xs text-emerald-400 hover:text-emerald-300 font-semibold transition-colors px-3 py-1.5 hover:bg-zinc-800 rounded-lg"
+                  className="text-xs font-semibold transition-colors px-3 py-1.5 hover:bg-zinc-800/5 rounded-lg"
                 >
                   Cerrar
                 </button>
@@ -98,12 +98,12 @@ export default function NotificationsMenu() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.05 }}
-                      className="px-5 py-4 border-b border-zinc-800 hover:bg-zinc-800/50 transition-colors cursor-pointer group"
+                      className="px-5 py-4 hover:bg-zinc-800/5 transition-colors cursor-pointer group"
                     >
                       <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-emerald-500 rounded-full mt-1.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-semibold text-white group-hover:text-emerald-400 transition-colors">
+                          <p className="text-sm font-semibold group-hover:text-emerald-400 transition-colors">
                             {n.title}
                           </p>
                           <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
@@ -118,7 +118,7 @@ export default function NotificationsMenu() {
                   ))
                 ) : (
                   <div className="px-5 py-12 text-center">
-                    <div className="w-16 h-16 mx-auto mb-4 bg-zinc-800 rounded-full flex items-center justify-center">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center">
                       <svg className="w-8 h-8 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                       </svg>
@@ -130,8 +130,8 @@ export default function NotificationsMenu() {
 
               {/* Footer opcional */}
               {sampleNotifications.length > 0 && (
-                <div className="px-5 py-3 border-t border-zinc-800 bg-zinc-900">
-                  <button className="w-full text-center text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors py-2 hover:bg-zinc-800 rounded-lg">
+                <div className="px-5 py-3 border-t border-zinc-800/10">
+                  <button className="w-full text-center text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors py-2 hover:bg-zinc-800/5 rounded-lg">
                     Ver todas las notificaciones
                   </button>
                 </div>

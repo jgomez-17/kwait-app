@@ -5,9 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { IconLogout } from "@tabler/icons-react";
-import { X, Menu, ChevronLeft, ChevronRight, LogOut } from "lucide-react";
-import { ReportsIcon, BagSolid, UsersSolid, DashboardIcon, LogoutIcon } from "@/app/components/icons";
+import { X, Menu, ChevronLeft, ChevronRight } from "lucide-react";
+import { ReportsIcon, BagSolid, UsersSolid, DashboardIcon, LogoutIcon, Loading4 } from "@/app/components/icons";
 import NotificationsMenu from "../components/NotificationButton";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -15,20 +14,68 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+  const [user, setUser] = useState<{ username: string; role: string } | null>(null);
+  const [loading, setLoading] = useState(true); // 🔹 nuevo
 
-  useEffect(() => {
+
+useEffect(() => {
+  const fetchUser = async () => {
+    try {
+      const res = await fetch("/api/auth/me", { credentials: "include" });
+      if (!res.ok) throw new Error("No autorizado");
+
+      const data = await res.json();
+      setUser(data);
+    } catch (err) {
+      console.error(err);
+      router.push("/unauthorized"); // 🔹 redirige si no autorizado
+    } finally {
+      setLoading(false); // 🔹 ya terminó de intentar
+    }
+  };
+
+  fetchUser();
+}, []);
+
+useEffect(() => {
     if (typeof window === "undefined") return;
     document.body.style.overflow = sidebarOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [sidebarOpen]);
+}, [sidebarOpen]);
 
+const handleLogout = async () => {
+  try {
+    const res = await fetch("/api/logout", { method: "POST" });
+
+    if (res.ok) {
+      // Redirigir después de cerrar sesión correctamente
+      window.location.href = "/login";
+    } else {
+      console.error("Error al cerrar sesión");
+    }
+  } catch (error) {
+    console.error("Error al cerrar sesión:", error);
+  }
+};
+
+if (loading) {
+    // 🔹 No renderiza nada del dashboard hasta confirmar token
+    return (
+      <div className="flex items-center justify-center h-screen bg-slate-50">
+        <Loading4 />
+      </div>
+    );
+}
+
+if (!user) return null; // seguridad extra, aunque router.replace ya redirige
+  
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50">
+    <div className="min-h-screen flex flex-col">
       {/* Header */}
       <header
-        className={`w-full bg-zinc-900 border-b border-zinc-800 h-18 flex items-center justify-between px-4 md:px-6 fixed top-0 right-0 z-50 transition-all duration-75 ${
+        className={`w-full bg-white h-18 flex items-center justify-between px-4 md:px-6 fixed top-0 right-0 z-50 transition-all duration-75 shadow ${
           sidebarCollapsed ? "md:pl-24" : "md:pl-70"
         }`}
       >
@@ -46,8 +93,20 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             Admin Panel
           </h2>
         </div>
+          {user ? (
+          <div className="text-sm py-1 px-3 gap-8 flex items-center">
+            <div className="capitalize text-blue-600 rounded-xl px-3 py-1 font-medium">
+              <p><strong className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">Welcome {user.username}</strong> </p>
+            </div>
+            {/* <div className="bg-emerald-500/5 text-xs text-emerald-500 font-semibold tracking-wide px-2 py-1 rounded-xl">
+              <p className="">{user.role}</p>
+            </div> */}
+          </div>
+          ) : (
+            <p className="text-gray-400">Cargando usuario...<Loading4 /> </p>
+          )}
         
-        <div className="flex items-center gap-3">
+        <div className="hidden md:block items-center gap-3">
           <NotificationsMenu />
         </div>
       </header>
@@ -55,7 +114,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <div className="flex flex-1">
         {/* Sidebar Desktop */}
         <aside
-          className={`hidden md:flex bg-zinc-900 border-r border-zinc-800 flex-col transition-all duration-75 fixed h-[calc(100vh)] z-50 ${
+          className={`hidden md:flex bg-white shadow flex-col transition-all duration-75 fixed h-[calc(100vh)] z-50 ${
             sidebarCollapsed ? "w-20" : "w-64"
           }`}
         >
@@ -74,7 +133,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               </div>
               {!sidebarCollapsed && (
                 <div className="flex flex-col">
-                  <span className="font-bold text-white">Kwait</span>
+                  <span className="font-bold ">Kwait</span>
                   <span className="text-xs text-zinc-400">Admin Panel</span>
                 </div>
               )}
@@ -82,7 +141,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             
             <button
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-              className="absolute -right-3 top-1/2 -translate-y-1/2 bg-zinc-800  text-zinc-400 hover:text-emerald-400 hover:bg-zinc-700 transition-all rounded-full p-1.5 shadow-lg z-50"
+              className="absolute -right-3 top-1/2 -translate-y-1/2 bg-white  text-zinc-500 hover:text-emerald-400  transition-all rounded-full p-1.5 shadow-lg z-50"
               aria-label="Contraer sidebar"
             >
               {sidebarCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
@@ -100,37 +159,44 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             />
             <NavItem
               icon={<BagSolid />}
-              label="Productos"
+              label="Products"
               href="/products"
               collapsed={sidebarCollapsed}
               active={pathname.startsWith("/products")}
             />
             <NavItem
               icon={<ReportsIcon />}
-              label="Reportes"
+              label="Reports"
               href="/reports"
               collapsed={sidebarCollapsed}
               active={pathname.startsWith("/reports")}
             />
             <NavItem
               icon={<UsersSolid />}
-              label="Clientes"
+              label="Clients"
               href="/clientes"
               collapsed={sidebarCollapsed}
               active={pathname.startsWith("/clientes")}
             />
+            <NavItem
+              icon={<UsersSolid />}
+              label="Register"
+              href="/register"
+              collapsed={sidebarCollapsed}
+              active={pathname.startsWith("/register")}
+            />
           </nav>
 
-          {/* Logout button */}
-          <div className="p-3 border-t border-zinc-800">
+          {/* Logout */}
+          <div className="p-3">
             <button
-              onClick={() => router.push("/")}
-              className={`group w-full flex items-center gap-3 px-4 py-3 rounded-xl font-semibold  bg-red-950 hover:bg-red-950/90 text-red-400 transition-all duration-75 ${
+              onClick={() => handleLogout()}
+              className={`group w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium border border-red-700/5 bg-red-600/5 text-red-600 hover:bg-red-600/15 transition-all duration-75 ${
                 sidebarCollapsed ? "justify-center" : ""
               }`}
             >
               <LogoutIcon />
-              {!sidebarCollapsed && <span>Cerrar sesión</span>}
+              {!sidebarCollapsed && <span>Log out</span>}
             </button>
           </div>
         </aside>
@@ -160,7 +226,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               className="fixed inset-y-0 left-0 z-50 w-72 bg-zinc-900 shadow-2xl md:hidden border-r border-zinc-800"
             >
               {/* Header móvil */}
-              <div className="flex items-center justify-between h-16 px-4 border-b border-zinc-800">
+              <div className="flex items-center justify-between h-18 px-4 border-b border-zinc-800">
                 <div className="flex items-center gap-3">
                   <div className="relative">
                     <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg blur opacity-40" />
@@ -195,21 +261,27 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 />
                 <NavItem
                   icon={<BagSolid />}
-                  label="Productos"
+                  label="Products"
                   href="/products"
                   active={pathname.startsWith("/products")}
                 />
                 <NavItem
                   icon={<ReportsIcon />}
-                  label="Reportes"
+                  label="Reports"
                   href="/reports"
                   active={pathname.startsWith("/reports")}
                 />
                 <NavItem
                   icon={<UsersSolid />}
-                  label="Clientes"
+                  label="Clients"
                   href="/clientes"
                   active={pathname.startsWith("/clientes")}
+                />
+                <NavItem
+                  icon={<UsersSolid />}
+                  label="Register"
+                  href="/register"
+                  active={pathname.startsWith("/register")}
                 />
               </nav>
 
@@ -217,10 +289,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-zinc-800 bg-zinc-900">
                 <button
                   onClick={() => router.push("/")}
-                  className="w-full flex items-center justify-center gap-2 bg-red-950 hover:bg-red-600 text-red-400 hover:text-white px-4 py-3 rounded-xl font-semibold transition-all duration-300 group"
+                  className="w-full flex items-center justify-center gap-2 border border-transparent hover:border-red-900 hover:bg-red-600/5 text-red-900 px-4 py-3 rounded-xl font-semibold transition-all duration-300 group"
                 >
                   <LogoutIcon /> 
-                  <span>Cerrar sesión</span>
+                  <span>Log out</span>
                 </button>
               </div>
             </motion.aside>
@@ -259,7 +331,7 @@ const NavItem = ({
     className={`group flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-medium relative overflow-hidden ${
       active
         ? "bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-500/30"
-        : "text-zinc-400 hover:bg-zinc-800 hover:text-emerald-400"
+        : "text-zinc-400 hover:bg-zinc-800/5 hover:text-emerald-400"
     } ${collapsed ? "justify-center" : ""}`}
   >
     {/* Active indicator */}
@@ -277,7 +349,6 @@ const NavItem = ({
       </span>
     )}
     
-    {/* Tooltip for collapsed state */}
     {collapsed && (
       <div className="absolute left-full ml-2 px-3 py-1.5 bg-zinc-800 text-white text-sm rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all whitespace-nowrap shadow-xl border border-zinc-700">
         {label}

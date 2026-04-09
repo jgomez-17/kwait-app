@@ -8,6 +8,58 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+// model Product {
+//   id          Int       @id @default(autoincrement())
+//   name        String
+//   description String?
+//   price       Int
+//   category    String
+//   image       String?
+//   available   Boolean   @default(true)
+//   createdAt   DateTime  @default(now())
+
+//   orderItems  OrderItem[]
+// }
+
+// enum OrderStatus {
+//   PENDING
+//   IN_PREPARATION
+//   ON_THE_WAY
+//   DELIVERED
+//   CANCELED
+// }
+
+
+// model Order {
+//   id            Int           @id @default(autoincrement())
+//   items         OrderItem[]
+//   subtotal      Int
+//   comment       String?
+//   deliveryType  String
+//   deliveryInfo  DeliveryInfo?
+//   status        OrderStatus   @default(PENDING)
+//   createdAt     DateTime      @default(now())
+// }
+
+
+// model OrderItem {
+//   id        Int     @id @default(autoincrement())
+//   order     Order   @relation(fields: [orderId], references: [id])
+//   orderId   Int
+//   product   Product @relation(fields: [productId], references: [id])
+//   productId Int
+//   qty       Int
+// }
+
+// model DeliveryInfo {
+//   id       Int    @id @default(autoincrement())
+//   name     String
+//   address  String
+//   phone    String
+//   order    Order  @relation(fields: [orderId], references: [id])
+//   orderId  Int    @unique
+// }
+
 model Product {
   id          Int       @id @default(autoincrement())
   name        String
@@ -29,7 +81,6 @@ enum OrderStatus {
   CANCELED
 }
 
-
 model Order {
   id            Int           @id @default(autoincrement())
   items         OrderItem[]
@@ -39,8 +90,11 @@ model Order {
   deliveryInfo  DeliveryInfo?
   status        OrderStatus   @default(PENDING)
   createdAt     DateTime      @default(now())
-}
 
+  // Relación con el usuario que creó el pedido (opcional)
+  user          User?         @relation(fields: [userId], references: [id])
+  userId        Int?
+}
 
 model OrderItem {
   id        Int     @id @default(autoincrement())
@@ -60,4 +114,20 @@ model DeliveryInfo {
   orderId  Int    @unique
 }
 
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  role      Role     @default(VENDEDOR)
+  createdAt DateTime @default(now())
+
+  orders    Order[]
+}
+
+enum Role {
+  ADMIN
+  VENDEDOR
+  COCINERO
+  REPARTIDOR
+}
 

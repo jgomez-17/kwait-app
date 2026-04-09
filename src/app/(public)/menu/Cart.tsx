@@ -35,6 +35,9 @@ export const Cart: React.FC = () => {
   };
 
 const handleCheckout = async () => {
+
+  const userId = null; // Aquí puedes obtener el userId si tienes un sistema de autenticación
+
   const payload = {
     // si tienes un userId o algo similar, agrégalo aquí
     items: items.map((it) => ({
@@ -45,6 +48,7 @@ const handleCheckout = async () => {
     comment,
     deliveryType,
     deliveryInfo: deliveryType === "delivery" ? deliveryInfo : null,
+    userId, // ✅ incluir userId en la carga útil
   };
 
   try {
@@ -79,16 +83,16 @@ const handleCheckout = async () => {
         <button
           aria-label="Abrir carrito"
           onClick={() => toggleOpen(true)}
-          className="relative bg-gradient-to-br from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white shadow-2xl hover:shadow-emerald-500/50 px-5 py-3.5 rounded-2xl flex items-center gap-3 transition-all duration-300 hover:scale-105"
+          className="relative bg-black hover:from-gray-700 hover:to-slate-800 text-white shadow-2xl hover:shadow-emerald-500/50 px-5 py-3.5 rounded-2xl flex items-center gap-3 transition-all duration-300 hover:scale-105"
         >
           <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path d="M3 3h2l.4 2M7 13h10l3-8H6.4" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
             <circle cx="10" cy="20" r="1" fill="currentColor" />
             <circle cx="18" cy="20" r="1" fill="currentColor" />
           </svg>
-          <div className="hidden sm:block font-semibold">Carrito</div>
+          <div className="hidden sm:block font-semibold">Tu pedido</div>
           {totalItems > 0 && (
-            <div className="absolute -top-2 -right-2 bg-gradient-to-br from-pink-500 to-red-500 text-white rounded-full w-7 h-7 text-xs flex items-center justify-center shadow-lg font-bold animate-pulse">
+            <div className="absolute -top-2 -right-2 bg-gradient-to-br from-red-700 to-red-500 text-white rounded-full w-7 h-7 text-xs flex items-center justify-center shadow-lg font-bold">
               {totalItems}
             </div>
           )}
@@ -122,7 +126,7 @@ const handleCheckout = async () => {
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="text-right">
-                      <div className="text-xs text-slate-500 uppercase tracking-wide">Total</div>
+                      <div className="text-xs font-bold text-slate-500 uppercase tracking-wide">Total</div>
                       <div className="text-lg font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                         ${subtotal.toFixed(0)}
                       </div>
@@ -147,7 +151,7 @@ const handleCheckout = async () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                       </svg>
                     </div>
-                    <p className="text-slate-500 text-lg">Tu carrito está vacío</p>
+                    <p className="text-slate-500 text-lg">Tu pedido está vacio</p>
                     <p className="text-slate-400 text-sm mt-2">Agrega productos para comenzar</p>
                   </div>
                 ) : (
@@ -157,13 +161,24 @@ const handleCheckout = async () => {
                       {items.map((it) => (
                         <div key={it.product.id} className="group bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden border border-slate-100">
                           <div className="flex items-start gap-4 p-4">
-                            <div className="w-16 h-16 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-xl flex items-center justify-center text-lg font-bold text-emerald-600 flex-shrink-0">
-                              {it.product.name.slice(0, 2).toUpperCase()}
+                            <div className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
+                              {it.product.image ? (
+                                <img
+                                  src={it.product.image}
+                                  alt={it.product.name}
+                                  className="w-full h-full object-cover"
+                                />
+                              ) : (
+                                <div className="w-full h-full bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center text-lg font-bold text-emerald-600">
+                                  {it.product.name.slice(0, 2).toUpperCase()}
+                                </div>
+                              )}
                             </div>
+
                             <div className="flex-1 min-w-0">
                               <div className="flex justify-between items-start gap-2 mb-2">
                                 <div className="flex-1">
-                                  <h4 className="font-semibold text-slate-800 text-base leading-tight">{it.product.name}</h4>
+                                  <h4 className="font-semibold text-slate-800 text-base leading-tight capitalize">{it.product.name}</h4>
                                   <p className="text-sm text-slate-500 mt-0.5">${it.product.price.toFixed(0)} c/u</p>
                                 </div>
                                 <div className="text-right">
@@ -298,7 +313,7 @@ const handleCheckout = async () => {
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Subtotal</div>
-                      <div className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                      <div className="text-3xl font-bold text-green-800">
                         ${subtotal.toFixed(0)}
                       </div>
                     </div>
@@ -316,7 +331,7 @@ const handleCheckout = async () => {
                     </button>
                     <button 
                       onClick={handleCheckout} 
-                      className="flex-1 px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold shadow-lg hover:shadow-xl hover:shadow-emerald-500/50 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+                      className="flex-1 px-6 py-3 rounded-xl bg-black text-white font-bold shadow-lg hover:shadow-xl transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
                     >
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />

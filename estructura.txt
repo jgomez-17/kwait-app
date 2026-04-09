@@ -1,0 +1,90 @@
+Listado de rutas de carpetas
+El número de serie del volumen es E00B-4694
+C:\USERS\JGOMEZZ\DESKTOP\NEXT JS PROYECTS\KWAIT APP\KWAIT-APP\SRC\APP
+|   globals.css
+|   layout.tsx
+|   middleware.ts
+|   
++---(adminpanel)
+|   |   global.css
+|   |   layout.tsx
+|   |   layout1.tsx
+|   |   layout2.tsx
+|   |   
+|   +---dashboard
+|   |       LogoutB.tsx
+|   |       page.tsx
+|   |       page2.tsx
+|   |       
+|   +---products
+|   |   |   page.tsx
+|   |   |   page2.tsx
+|   |   |   
+|   |   +---addProduct
+|   |   |       page.tsx
+|   |   |       
+|   |   \---[id]
+|   |       \---edit
+|   |               editProductClient.tsx
+|   |               page.tsx
+|   |               
+|   \---reports
+|           page.tsx
+|           
++---(public)
+|   |   page.tsx
+|   |   
+|   +---login
+|   |       page.tsx
+|   |       
+|   +---menu
+|   |       Cart.tsx
+|   |       CartContext.tsx
+|   |       Menu.tsx
+|   |       page.tsx
+|   |       
+|   \---register
+|           page.tsx
+|           
++---api
+|   +---auth
+|   |   +---login
+|   |   |       route.ts
+|   |   |       
+|   |   +---me
+|   |   |       route.ts
+|   |   |       
+|   |   \---register
+|   |           route.ts
+|   |           
+|   +---clients
+|   +---logout
+|   |       route.ts
+|   |       
+|   +---orders
+|   |   |   route.ts
+|   |   |   
+|   |   \---[id]
+|   |           route.ts
+|   |           
+|   +---products
+|   |   |   route.ts
+|   |   |   
+|   |   \---[id]
+|   |           route.ts
+|   |           
+|   +---users
+|   \---utils
+|           auth.ts
+|           db.ts
+|           responses.ts
+|           
++---components
+|       icons.tsx
+|       MenuSection.tsx
+|       NotificationButton.tsx
+|       ProductCard.tsx
+|       
+\---unauthorized
+        page.tsx
+        

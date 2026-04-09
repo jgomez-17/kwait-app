@@ -4,16 +4,54 @@ import { useState } from "react";
 import { User, Lock, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { Loading5 } from "@/app/components/icons";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ username, password });
-    router.push('/dashboard');
+    setErrorMsg("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        // Mensaje de error según el backend
+        setErrorMsg(data.error || "Credenciales incorrectas");
+        setLoading(false);
+        return;
+      }
+
+      // Guardar token en localStorage
+      document.cookie = `token=${data.token}; path=/; max-age=${12 * 60 * 60}; HttpOnly; Secure; SameSite=Strict;`;
+      
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("username", data.user.username);
+      localStorage.setItem("role", data.user.role);
+
+    // Verificamos el rol antes de redirigir
+    if (data.user.role === "ADMIN") {
+      router.push("/dashboard");
+    } else {
+      alert("No tienes permisos para acceder al panel administrativo.");
+      setLoading(false);
+    }
+  } catch (error) {
+    console.error("❌ Error:", error);
+    alert("Error de conexión con el servidor");
+  }
   };
 
   return (
@@ -30,7 +68,6 @@ export default function LoginPage() {
         transition={{ duration: 0.4 }}
         className="relative z-10 bg-white/80 backdrop-blur-xl p-10 rounded-3xl md:shadow-2xl w-full max-w-md border border-white/20"
       >
-
         {/* Título */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -39,29 +76,29 @@ export default function LoginPage() {
           className="text-center mb-8"
         >
           <h1 className="text-3xl font-bold bg-black bg-clip-text text-transparent mb-2">
-            Bienvenido de vuelta
+            Welcome Back
           </h1>
-          <p className="text-slate-500 text-sm">Accede al panel administrativo</p>
+          <p className="text-slate-500 text-sm">Access the administrative panel</p>
         </motion.div>
 
-        <div className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5">
           {/* Campo Usuario */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
-              Usuario
+            <label className="block text-sm font-medium text-slate-700 mb-2">
+              User
             </label>
             <div className="relative group">
               <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-200 z-10" size={22} />
               <input
                 type="text"
-                placeholder="Nombre de usuario"
+                placeholder="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full tracking-wider pl-12 pr-4 py-3.5 border-2 border-transparent rounded-3xl outline-none transition-all bg-gray-100 backdrop-blur-sm placeholder:text-sm placeholder:text-gray-300 placeholder:font-medium"
+                className="w-full tracking-wider pl-12 pr-4 py-3.5 border-2 border-transparent rounded-3xl outline-none transition-all bg-gray-50 backdrop-blur-sm placeholder:text-sm placeholder:text-gray-300 placeholder:font-medium"
                 required
               />
             </div>
@@ -73,8 +110,8 @@ export default function LoginPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
-              Contraseña
+            <label className="block text-sm font-medium text-slate-700 mb-2">
+              Password
             </label>
             <div className="relative group">
               <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-200 z-10" size={20} />
@@ -89,17 +126,30 @@ export default function LoginPage() {
             </div>
           </motion.div>
 
-          {/* Botón de submit */}
-          <button
+          {/* Mensaje de error */}
+          {errorMsg && (
+            <p className="text-center text-red-500 text-sm font-medium">{errorMsg}</p>
+          )}
 
-            onClick={handleSubmit}
-            type="button"
-            className="group w-full bg-black text-white font-bold py-4 rounded-3xl transition-all shadow-lg flex items-center justify-center group"
+          {/* Botón */}
+          <button
+            disabled={loading}
+            type="submit"
+            className={`group w-full ${
+              loading ? "bg-gray-500" : "bg-black hover:bg-gray-900"
+            } text-white font-medium py-4 rounded-3xl transition-all shadow-lg flex items-center justify-center`}
           >
-            <span className="group-hover:-translate-x-1 transition">Iniciar sesión</span>
-            <ArrowRight className="w-5 absolute opacity-0 group-hover:translate-0 group-hover:relative h-5 group-hover:translate-x-1 group-hover:opacity-100 transition-transform" />
+            {loading ? <> <span className="font-semibold">verifying&nbsp;&nbsp;</span> <Loading5  />
+            </>  : (
+              <>
+                <span className="group-hover:-translate-x-1 transition">
+                  Log in
+                </span>
+                <ArrowRight className="w-5 absolute opacity-0 group-hover:translate-0 group-hover:relative h-5 group-hover:translate-x-1 group-hover:opacity-100 transition-transform" />
+              </>
+            )}
           </button>
-        </div>
+        </form>
 
         {/* Footer */}
         <motion.div
@@ -109,7 +159,7 @@ export default function LoginPage() {
           className="mt-8 pt-6 border-t border-slate-200"
         >
           <p className="text-slate-500 text-xs text-center">
-            © {new Date().getFullYear()} Kwait App — Panel administrativo
+            © {new Date().getFullYear()} Kwait App — Administrative Panel
           </p>
         </motion.div>
       </motion.div>

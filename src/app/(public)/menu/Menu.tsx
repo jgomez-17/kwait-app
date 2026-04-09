@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Product, useCart } from "./CartContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, Plus } from "lucide-react";
+import { Loading4, Loading5, RoundedPlus } from "@/app/components/icons";
 
 export const Menu: React.FC = () => {
   const { addItem } = useCart();
@@ -25,6 +26,7 @@ export const Menu: React.FC = () => {
         
         const data = await response.json();
         setProducts(data);
+        console.log("Productos cargados:", data);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Error desconocido');
       } finally {
@@ -69,8 +71,8 @@ export const Menu: React.FC = () => {
   if (loading) {
     return (
       <div className="min-h-screen py-8 px-4 sm:px-6 flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-emerald-600 mb-4"></div>
+        <div className="text-center flex items-center justify-center flex-col gap-4">
+          <Loading4 />
           <p className="text-slate-600 text-lg">Cargando menú...</p>
         </div>
       </div>
@@ -133,11 +135,11 @@ export const Menu: React.FC = () => {
                     className="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl hover:shadow-slate-500/30 transition-all duration-75 overflow-hidden"
                   >
                     {/* Background gradient on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-slate-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-75" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-slate-500/10 to-gray-700/10 opacity-0 group-hover:opacity-100 transition-opacity duration-75" />
                     
                     {/* Content */}
                     <div className="relative z-10 flex flex-col items-center gap-4">
-                      <div className="w-20 h-20 bg-gradient-to-br from-emerald-100 to-teal-100 group-hover:from-emerald-500 group-hover:to-teal-600 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-md">
+                      <div className="w-20 h-20 bg-gradient-to-br from-gray-100 to-slate-100 group-hover:from-gray-100 group-hover:to-slate-200 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-md">
                         <span className="text-4xl group-hover:scale-110 transition-transform duration-75">
                           {getCategoryIcon(cat)}
                         </span>
@@ -174,7 +176,7 @@ export const Menu: React.FC = () => {
               exit="exit"
             >
               {/* Header de categoría */}
-              <div className="bg-white-/80 backdrop-blur-sm rounded-3xl p-4 mb-8 shadow-lg sticky top-2 z-20">
+              <div className="bg-white-/80 backdrop-blur-sm p-4 mb-8 border-b border-slate-200 sticky top-2 z-20">
                 <div className="flex items-center justify-between">
                   <button
                     onClick={() => setSelectedCategory(null)}
@@ -203,52 +205,50 @@ export const Menu: React.FC = () => {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.04 }}
-                    whileHover={{ y: -2 }}
-                    className="group bg-white rounded-3xl shadow-lg hover:shadow-2xl hover:shadow-emerald-slate/20 transition-all duration-100 overflow-hidden"
+                    whileHover={{ y: -1 }}
+                    className="group w-full rounded-3xl flex hover:shadow-2xl hover:shadow-emerald-slate/20 transition-all duration-100 overflow-hidden h-48 px-2 border border-slate-200"
                   >
                     {/* Imagen del producto */}
-                    <div className="relative h-48 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-300">
-                      {p.img ? (
+                    <div className="relative flex items-center w-7/12 overflow-hidden">
+                      {p.image ? (
                         <img
-                          src={p.img}
+                          src={p.image}
                           alt={p.name}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-100"
+                          className="h-42 p-2 object-cover rounded-3xl group-hover:scale-105 transition-transform duration-75"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center">
+                        <div className=" h-full flex items-center justify-center">
                           <span className="text-6xl opacity-30">
                             {getCategoryIcon(selectedCategory)}
                           </span>
                         </div>
                       )}
                       {/* Badge de categoría */}
-                      <div className="absolute top-3 left-3 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-emerald-600 shadow-md">
+                      {/* <div className="absolute top-3 left-3 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-emerald-600 shadow-md">
                         {selectedCategory}
-                      </div>
+                      </div> */}
                     </div>
 
                     {/* Contenido */}
-                    <div className="p-6">
-                      <h4 className="font-bold text-xl text-slate-800 mb-2 group-hover:text-emerald-600 transition-colors">
+                    <div className="w-full flex flex-col justify-center gap-2 p-2 relative">
+                      <h4 className="font-bold text-xl text-slate-800 mb-2 capitalize">
                         {p.name}
                       </h4>
-                      <p className="text-sm text-slate-500 mb-4 line-clamp-2 leading-relaxed">
+                      <p className="text-sm text-slate-500 mb-4 line-clamp-2 leading-relaxed capitalize">
                         {p.description || "Deliciosa opción preparada con los mejores ingredientes"}
                       </p>
                       
                       <div className="flex items-center justify-between pt-4 border-t border-slate-100">
                         <div>
-                          <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Precio</div>
-                          <div className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                          <div className="text-2xl font-bold text-green-700">
                             ${p.price.toFixed(0)}
                           </div>
                         </div>
                         <button
                           onClick={() => addItem(p)}
-                          className="group/btn relative px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-emerald-500/50 transition-all duration-300 flex items-center gap-2 hover:scale-105 active:scale-95"
+                          className="group/btn absolute p-3.5 rounded-full right-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-emerald-500/50 transition-all duration-75 flex items-center gap-2 hover:scale-105 active:scale-95"
                         >
-                          <Plus className="w-4 h-4 group-hover/btn:rotate-90 transition-transform duration-300" />
-                          <span>Agregar</span>
+                          <RoundedPlus />
                         </button>
                       </div>
                     </div>

@@ -28,7 +28,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <div className="min-h-screen flex flex-col bg-slate-50">
       {/* Header */}
       <header
-        className={`w-full bg-white border-b border-slate-200 h-16 flex items-center justify-between px-4 md:px-6 fixed top-0 right-0 z-40 transition-all duration-300 ${
+        className={`w-full bg-white bg border-b border-slate-200 h-16 flex items-center justify-between px-4 md:px-6 fixed top-0 right-0 z-40 transition-all duration-300 ${
           sidebarCollapsed ? "md:pl-24" : "md:pl-70"
         }`}
       >

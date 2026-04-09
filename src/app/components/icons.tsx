@@ -54,7 +54,7 @@ export const BackIcon = () => (
 );
 
 export const LogoutIcon = () => (
-<svg xmlns="http://www.w3.org/2000/svg" width="22" height="auto" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5"><path d="M14 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-2" /><path d="M9 12h12l-3-3m0 6l3-3" /></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="auto" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M14 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-2" /><path d="M9 12h12l-3-3m0 6l3-3" /></g></svg>
 );
 
 export const EditIcon = () => (
@@ -81,11 +81,13 @@ export const Food1  = () => (
 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="auto" viewBox="0 0 28 28"><path fill="currentColor" d="M5.492 2.79a.881.881 0 0 1 1.758.092v5.867a.75.75 0 1 0 1.5 0V2.75a.75.75 0 0 1 1.5 0v5.999a.75.75 0 0 0 1.5 0V2.882a.882.882 0 0 1 1.758-.092c.076.722.492 4.785.492 6.71c0 1.338-.585 2.54-1.51 3.364c-.334.296-.49.601-.49.857v.727l.001.047c.042.599.499 7.287.499 8.505a3 3 0 1 1-6 0c0-1.218.458-7.906.499-8.505L7 14.448v-.727c0-.255-.156-.56-.49-.857A4.5 4.5 0 0 1 5 9.5c0-1.925.416-5.988.492-6.71M18.955 14l-.032.556c-.047.817-.11 1.92-.172 3.062c-.124 2.267-.251 4.734-.251 5.382a3 3 0 1 0 6 0c0-.721-.158-3.474-.294-5.855l-.004-.066C24.093 15.18 24 13.55 24 13.25V2.75a.75.75 0 0 0-.75-.75h-.5A6.75 6.75 0 0 0 16 8.75v3.5c0 .966.784 1.75 1.75 1.75z" /></svg>
 );
 
-// export const  = () => (
-// );
+ export const Loading4  = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><g stroke="currentColor"><circle cx="12" cy="12" r="9.5" fill="none" strokeLinecap="round" strokeWidth="3"><animate attributeName="stroke-dasharray" calcMode="spline" dur="1.5s" keySplines="0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1" keyTimes="0;0.475;0.95;1" repeatCount="indefinite" values="0 150;42 150;42 150;42 150" /><animate attributeName="stroke-dashoffset" calcMode="spline" dur="1.5s" keySplines="0.42,0,0.58,1;0.42,0,0.58,1;0.42,0,0.58,1" keyTimes="0;0.475;0.95;1" repeatCount="indefinite" values="0;-16;-59;-59" /></circle><animateTransform attributeName="transform" dur="2s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12" /></g></svg>
+ );
 
-// export const  = () => (
-// );
+export const Loading5 = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><circle cx="4" cy="12" r="3" fill="currentColor"><animate id="SVG7x14Dcom" fill="freeze" attributeName="opacity" begin="0;SVGqSjG0dUp.end-0.25s" dur="0.75s" values="1;.2" /></circle><circle cx="12" cy="12" r="3" fill="currentColor" opacity=".4"><animate fill="freeze" attributeName="opacity" begin="SVG7x14Dcom.begin+0.15s" dur="0.75s" values="1;.2" /></circle><circle cx="20" cy="12" r="3" fill="currentColor" opacity=".3"><animate id="SVGqSjG0dUp" fill="freeze" attributeName="opacity" begin="SVG7x14Dcom.begin+0.3s" dur="0.75s" values="1;.2" /></circle></svg>
+);
 
 // export const  = () => (
 // );

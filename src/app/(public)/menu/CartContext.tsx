@@ -8,7 +8,7 @@ export type Product = {
   category: string;
   description?: string;
   price: number;
-  img?: string;
+  image?: string;
 };
 
 export type CartItem = {
